@@ -60,7 +60,7 @@ export class SongDetailComponent implements OnInit {
         })
     }
 
-    deleteSong () {
+    /*deleteSong () {
         const options = {
             title: "Delete song",
             buttons: ["Yes", "Cancel"],
@@ -75,7 +75,22 @@ export class SongDetailComponent implements OnInit {
                 this.router.navigateByUrl("/tabs")  
             })
         } 
-    }
+    } */
+
+    deleteSong() {
+        const message = 'Confirm deletion of the song?';
+        const confirm = window.confirm(message);
+    
+        if (confirm) {
+          this.songService.deleteSong(this.song._id).subscribe(
+            () => {},
+            (error: ErrorEvent) => {
+              this.router.navigateByUrl('/tabs');
+            }
+          );
+        }
+      }
+    
 
     getCollectionCoverUrl(collection: Collection): string {
         if (collection.coverUrl)
